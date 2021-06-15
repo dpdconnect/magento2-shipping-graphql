@@ -1,0 +1,31 @@
+{
+    "name": "dpdconnect/magento2-shipping-graphql",
+    "description": "DPD Connect - Magento2 Shipping GraphQL",
+    "type": "magento2-module",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "DPD",
+            "email": "pluginsupport@dpd.nl",
+            "homepage": "http://www.dpd.nl"
+        }
+    ],
+    "support": {
+        "email": "pluginsupport@dpd.nl",
+        "issues": "http://www.dpd.nl/"
+    },
+    "homepage": "https://www.dpd.com/nl/business_customers/hulp_en_tools/e_commerce/magento",
+    "keywords": ["dpd", "dpd parcelservice", "Magento2", "GraphQL"],
+    "minimum-stability": "stable",
+    "require": {
+        "dpdconnect/magento2-shipping": "^1.1"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "DpdConnect\\ShippingGraphQl\\": ""
+        }
+    }
+}

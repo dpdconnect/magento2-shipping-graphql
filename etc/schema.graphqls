@@ -1,0 +1,69 @@
+
+type Query {
+
+    parcelshops (
+            query: String @doc(description: "Query by query."),
+            postcode: String @doc(description: "Query by postcode."),
+            countryId: String @doc(description: "Query by countryId.")
+    ) : Parcelshops
+    @resolver(class: "DpdConnect\\ShippingGraphQl\\Model\\Resolver\\Parcelshops") @doc(description: "Query parcelshops by text or address.") @cache(cacheIdentity: "DpdConnect\\ShippingGraphQl\\Model\\Resolver\\Parcelshops\\Identity")
+
+    selectedParcelshop (
+            cart_id: String @doc(description: "Query by cartID."),
+    ) : SelectedParcelshop
+    @resolver(class: "DpdConnect\\ShippingGraphQl\\Model\\Resolver\\SelectedParcelshop") @doc(description: "Query selected parcelshop in current cart.")
+}
+
+
+type Mutation {
+    setParcelshop (
+            cart_id: String @doc(description: "Query by cart_id."),
+            parcelshop_id: String @doc(description: "Query by parcelshopId."),
+            company: String @doc(description: "Query by company."),
+            street: String @doc(description: "Query by street."),
+            houseno: String @doc(description: "Query by houseno."),
+            zipcode: String @doc(description: "Query by zipcode."),
+            city: String @doc(description: "Query by city."),
+            country: String @doc(description: "Query by country.")
+    ) : String @resolver( class: "DpdConnect\\ShippingGraphQl\\Model\\Resolver\\SetParcelshop") @doc(description: "Query by Set the parcelshop to ship to.")
+}
+
+type Parcelshops {
+
+    items  : [Parcelshop]  @doc(description: "Parcelshop items")
+    total_count  : Int  @doc(description: "Number of parcelshops in this result")
+}
+
+type Parcelshop {
+    parcelshop_id: String
+    company: String
+    street: String
+    houseno: String
+    zipcode: String
+    city: String
+    country: String
+    latitude: String
+    longitude: String
+    opening_hours: [ParcelshopOpeningHours]
+}
+
+type SelectedParcelshop {
+    parcelshop_id: String
+    company: String
+    street: String
+    zipcode: String
+    city: String
+    country: String
+}
+
+type ParcelshopOpeningHours {
+    open_morning: String
+    close_morning: String
+    open_afternoon: String
+    close_afternoon: String
+    weekday: String
+}
+
+type StoreConfig @doc(description: "The type contains information about a store config") {
+    dpd_google_maps_frontend_key : String @doc(description: "Frontend Javascript API key")
+}
